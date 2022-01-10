@@ -1,3 +1,2 @@
-FLASK_APP=entrypoint:app
+FLASK_APP=base.py
 FLASK_ENV=development
-export APP_SETTINGS_MODULE=config.default

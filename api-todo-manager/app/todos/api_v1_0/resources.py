@@ -1,8 +1,7 @@
 from flask import request, Blueprint
 from flask_restful import Api, Resource
-from app import db
 from .schemas import TodoSchema, FolderSchema
-from ..models import Todo, Folder
+from app.models import Todo, Folder
 
 
 # todos

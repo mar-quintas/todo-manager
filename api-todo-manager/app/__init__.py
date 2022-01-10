@@ -2,64 +2,69 @@ from flask import Flask, jsonify
 from flask_restful import Api
 from app.common.error_handling import ObjectNotFound, AppErrorBaseClass
 from app.db import db
-from app.todos.api_v1_0.resources import todos_v1_0_bp, folders_v1_0_bp
 from .ext import ma, migrate
-from .todos import views, models
-
-def create_app(settings_module):
-    app = Flask(__name__)
-    app.config.from_object(settings_module)
-
-    # Inicializa las extensiones
-    db.init_app(app)
-    ma.init_app(app)
-    migrate.init_app(app, db)
-
-    # Captura todos los errores 404
-    Api(app, catch_all_404s=True)
-
-    # Deshabilita el modo estricto de acabado de una URL con /
-    app.url_map.strict_slashes = False
-
-    # Registra los blueprints
-
-    app.register_blueprint(todos_v1_0_bp)
-    app.register_blueprint(folders_v1_0_bp)
+from config import Config
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from flask_login import LoginManager
 
 
-    # Registra manejadores de errores personalizados
-    register_error_handlers(app)
-    return app
+api = Flask(__name__)
+api.config.from_object(Config)
+
+# Inicializa las extensiones
+db.init_app(api)
+ma.init_app(api)
+migrate.init_app(api, db)
+login = LoginManager(api)
+
+# Captura todos los errores 404
+Api(api, catch_all_404s=True)
+
+# Deshabilita el modo estricto de acabado de una URL con /
+api.url_map.strict_slashes = False
+
+# Registra los blueprints
+from app.todos.api_v1_0.resources import todos_v1_0_bp as todos_blueprint
+api.register_blueprint(todos_blueprint)
+from app.todos.api_v1_0.resources import folders_v1_0_bp as folders_blueprint
+api.register_blueprint(folders_blueprint)
 
 
-def register_error_handlers(app):
+# Registra manejadores de errores personalizados
 
-    @app.errorhandler(Exception)
+def register_error_handlers(api):
+
+    @api.errorhandler(Exception)
     def handle_exception_error(e):
         print(e)
         return jsonify({'msg': 'Internal server error'}), 500
 
-    @app.errorhandler(405)
+    @api.errorhandler(405)
     def handle_405_error(e):
         print(e)
         return jsonify({'msg': 'Method not allowed'}), 405
 
-    @app.errorhandler(403)
+    @api.errorhandler(403)
     def handle_403_error(e):
         print(e)
         return jsonify({'msg': 'Forbidden error'}), 403
 
-    @app.errorhandler(404)
+    @api.errorhandler(404)
     def handle_404_error(e):
         print(e)
         return jsonify({'msg': 'Not Found error'}), 404
 
-    @app.errorhandler(AppErrorBaseClass)
+    @api.errorhandler(AppErrorBaseClass)
     def handle_app_base_error(e):
         print(e)
         return jsonify({'msg': str(e)}), 500
 
-    @app.errorhandler(ObjectNotFound)
+    @api.errorhandler(ObjectNotFound)
     def handle_object_not_found_error(e):
         print(e)
         return jsonify({'msg': str(e)}), 404
+
+register_error_handlers(api)
+
+from app import views, models
