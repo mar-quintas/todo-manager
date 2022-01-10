@@ -4,7 +4,7 @@ from app.common.error_handling import ObjectNotFound, AppErrorBaseClass
 from app.db import db
 from app.todos.api_v1_0.resources import todos_v1_0_bp, folders_v1_0_bp
 from .ext import ma, migrate
-
+from .todos import views, models
 
 def create_app(settings_module):
     app = Flask(__name__)

@@ -5,11 +5,10 @@ from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.urls import url_parse
 from .models import User
 from app.db import db
-from app import app
-
+from ..entrypoint import app
 
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
-jwt = JWTManager(api)
+jwt = JWTManager(app)
 
 @app.after_request
 def refresh_expiring_jwts(response):
