@@ -1,0 +1,3 @@
+FLASK_APP=entrypoint:app
+FLASK_ENV=development
+export APP_SETTINGS_MODULE=config.default
