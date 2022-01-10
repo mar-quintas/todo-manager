@@ -32,13 +32,12 @@ def logout():
 
 @api.route('/register', methods=["POST"])
 def register():
-    username = request.json.get("username", None)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     confirmation = request.json.get("confirmation", None)
 
     if password == confirmation:
-        user = User(username=username.lower(), email=email.lower())
+        user = User(email=email.lower())
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
