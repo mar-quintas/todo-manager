@@ -5,13 +5,13 @@ from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.urls import url_parse
 from .models import User
 from app.db import db
-# import app/api TODO
+from app import app
 
 
-api.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 jwt = JWTManager(api)
 
-@api.after_request
+@app.after_request
 def refresh_expiring_jwts(response):
     try:
         exp_timestamp = get_jwt()["exp"]
@@ -24,14 +24,14 @@ def refresh_expiring_jwts(response):
         # Case where there is not a valid JWT. Just return the original respone
         return response
 
-@api.route("/logout", methods=["POST"])
+@app.route("/logout", methods=["POST"])
 def logout():
     logout_user()
     response = jsonify({"msg": "logout successful"})
     unset_jwt_cookies(response)
     return response
 
-@api.route('/register', methods=["POST"])
+@app.route('/register', methods=["POST"])
 def register():
     username = request.json.get("username", None)
     email = request.json.get("email", None)
@@ -50,7 +50,7 @@ def register():
     else:
         return {"msg":"Password does not match"}, 401
 
-@api.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     nologin = False
     email = request.json.get("email", None)
@@ -64,3 +64,7 @@ def login():
         access_token = create_access_token(identity=email)
         response = {"access_token": access_token}
         return response
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))

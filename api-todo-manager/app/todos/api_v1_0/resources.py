@@ -1,6 +1,6 @@
 from flask import request, Blueprint
 from flask_restful import Api, Resource
-
+from app import db
 from .schemas import TodoSchema, FolderSchema
 from ..models import Todo, Folder
 
@@ -13,7 +13,7 @@ api_todos = Api(todos_v1_0_bp)
 # Filtrar por usuario TODO
 class TodoListResource(Resource):
     def get(self):
-        todos = Todo.get_all()
+        todos = Todo.get_by_id()
         result = film_schema.dump(todos, many=True)
         return result
 
