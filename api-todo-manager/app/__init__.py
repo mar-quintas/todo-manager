@@ -2,7 +2,7 @@ from flask import Flask, jsonify
 from flask_restful import Api
 from app.common.error_handling import ObjectNotFound, AppErrorBaseClass
 from app.db import db
-from app.todos.api_v1_0.resources import todos_v1_0_bp, folder_v1_0_bp
+from app.todos.api_v1_0.resources import todos_v1_0_bp, folders_v1_0_bp
 from .ext import ma, migrate
 
 
@@ -22,8 +22,9 @@ def create_app(settings_module):
     app.url_map.strict_slashes = False
 
     # Registra los blueprints
-    app.register_blueprint(folder_v1_0_bp)
+
     app.register_blueprint(todos_v1_0_bp)
+    app.register_blueprint(folders_v1_0_bp)
 
 
     # Registra manejadores de errores personalizados
@@ -35,24 +36,30 @@ def register_error_handlers(app):
 
     @app.errorhandler(Exception)
     def handle_exception_error(e):
+        print(e)
         return jsonify({'msg': 'Internal server error'}), 500
 
     @app.errorhandler(405)
     def handle_405_error(e):
+        print(e)
         return jsonify({'msg': 'Method not allowed'}), 405
 
     @app.errorhandler(403)
     def handle_403_error(e):
+        print(e)
         return jsonify({'msg': 'Forbidden error'}), 403
 
     @app.errorhandler(404)
     def handle_404_error(e):
+        print(e)
         return jsonify({'msg': 'Not Found error'}), 404
 
     @app.errorhandler(AppErrorBaseClass)
     def handle_app_base_error(e):
+        print(e)
         return jsonify({'msg': str(e)}), 500
 
     @app.errorhandler(ObjectNotFound)
     def handle_object_not_found_error(e):
+        print(e)
         return jsonify({'msg': str(e)}), 404
