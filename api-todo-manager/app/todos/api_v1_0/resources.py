@@ -20,7 +20,7 @@ class TodoListResource(Resource):
         data = request.get_json()
         todo_dict = todo_schema.load(data)
         todo = Todo(title=todo_dict['title'],
-                    folder=todo_dict['folder'],
+                    folder_id=todo_dict['folder_id'],
                     user_id=todo_dict['user_id'])
         film.save()
         resp = todo_schema.dump(todo)
@@ -51,7 +51,7 @@ class FolderListResource(Resource):
         folder_dict = folder_schema.load(data)
         folder = Folder(name=folder_dict['name'],
                         user_id=folder_dict['user_id'],
-                        todo_id=folder_dict['todo_id'])
+                        todos=folder_dict['todos'])
         folder.save()
         resp = folder_schema.dump(folder)
         return resp, 201

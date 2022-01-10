@@ -1,8 +1,8 @@
-"""todo db v0
+"""database two
 
-Revision ID: b632713f6ae6
+Revision ID: 8b4a154aa89e
 Revises: 
-Create Date: 2022-01-10 14:04:25.133304
+Create Date: 2022-01-10 18:02:40.062560
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'b632713f6ae6'
+revision = '8b4a154aa89e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -35,9 +35,9 @@ def upgrade():
     op.create_table('todo',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=140), nullable=True),
-    sa.Column('folder', sa.String(), nullable=True),
+    sa.Column('folder_id', sa.String(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['folder'], ['folder.id'], ),
+    sa.ForeignKeyConstraint(['folder_id'], ['folder.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
