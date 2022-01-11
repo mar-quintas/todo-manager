@@ -20,6 +20,7 @@ class TodoListResource(Resource):
         data = request.get_json()
         todo_dict = todo_schema.load(data)
         todo = Todo(title=todo_dict['title'],
+                    ready=todo_dict['ready'],
                     folder_id=todo_dict['folder_id'],
                     user_id=todo_dict['user_id'])
         film.save()

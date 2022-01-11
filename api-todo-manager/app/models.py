@@ -28,6 +28,7 @@ def load_user(id):
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(140))
+    ready = db.Column(db.Boolean)
     folder_id = db.Column(db.String, db.ForeignKey('folder.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
