@@ -7,6 +7,7 @@ import './App.css'
 import NavBar from './components/Navbar'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ToDo from './components/ToDo'
+import ToAdd from './components/ToAdd'
 import Container from 'react-bootstrap/Container'
 
 function App() {
@@ -29,7 +30,8 @@ function App() {
               </>)}
             </Routes>
           <Container>
-            <ToDo/>
+            <ToAdd token={token}/>
+
           </Container>
       </div>
     </BrowserRouter>

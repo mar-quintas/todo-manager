@@ -2,6 +2,9 @@ from flask import request, Blueprint
 from flask_restful import Api, Resource
 from .schemas import TodoSchema, FolderSchema
 from app.models import Todo, Folder
+from app import login
+from flask_login import login_user, logout_user, login_required, current_user
+from app.db import db, BaseModelMixin
 
 
 # todos
@@ -10,20 +13,23 @@ todo_schema = TodoSchema()
 api_todos = Api(todos_v1_0_bp)
 
 # Filtrar por usuario TODO
+
 class TodoListResource(Resource):
+    @login_required
     def get(self):
-        todos = Todo.get_by_id()
-        result = film_schema.dump(todos, many=True)
+        todos = Todo.query.filter_by(user_id=current_user.get_id())
+        result = todo_schema.dump(todos, many=True)
         return result
 
     def post(self):
-        data = request.get_json()
-        todo_dict = todo_schema.load(data)
-        todo = Todo(title=todo_dict['title'],
-                    ready=todo_dict['ready'],
-                    folder_id=todo_dict['folder_id'],
-                    user_id=todo_dict['user_id'])
-        film.save()
+        title = request.json.get("title", None)
+        user_id = current_user.get_id()
+        print(current_user)
+        folder = None
+        ready = False
+        todo = Todo(title=title, ready=ready, folder_id=folder, user_id=user_id)
+        print(f'title = {title}, user_id={user_id}, folder={folder}, ready={ready}, todo={todo}')
+        todo.save()
         resp = todo_schema.dump(todo)
         return resp, 201
 

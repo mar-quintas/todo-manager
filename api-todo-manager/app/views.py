@@ -59,6 +59,7 @@ def login():
         nologin = True
         return {"msg":"Incorrect Login"}, 401
     else:
+        login_user(user)
         access_token = create_access_token(identity=email)
         response = {"access_token": access_token}
         return response

@@ -12,7 +12,7 @@ class User(UserMixin, db.Model):
     folders = db.relationship('Folder', backref='user', lazy='dynamic')
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)
+        return '<User {}>'.format(self.id)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -25,7 +25,7 @@ def load_user(id):
     return User.query.get(int(id))
 
 
-class Todo(db.Model):
+class Todo(BaseModelMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(140))
     ready = db.Column(db.Boolean)
@@ -33,9 +33,9 @@ class Todo(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return '<ToDo  {}>'.format(self.title)
+        return '<Todo  {}>'.format(self.title)
 
-class Folder(db.Model):
+class Folder(BaseModelMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

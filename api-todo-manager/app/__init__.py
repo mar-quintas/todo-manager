@@ -36,11 +36,11 @@ api.register_blueprint(folders_blueprint)
 
 def register_error_handlers(api):
 
-    @api.errorhandler(Exception)
-    def handle_exception_error(e):
-        print(e)
-        return jsonify({'msg': 'Internal server error'}), 500
-
+    # @api.errorhandler(Exception)
+    # def handle_exception_error(e):
+    #     print(e)
+    #     return jsonify({'msg': 'Internal server error'}), 500
+    #
     @api.errorhandler(405)
     def handle_405_error(e):
         print(e)
@@ -56,10 +56,10 @@ def register_error_handlers(api):
         print(e)
         return jsonify({'msg': 'Not Found error'}), 404
 
-    @api.errorhandler(AppErrorBaseClass)
-    def handle_app_base_error(e):
-        print(e)
-        return jsonify({'msg': str(e)}), 500
+    # @api.errorhandler(AppErrorBaseClass)
+    # def handle_app_base_error(e):
+    #     print(e)
+    #     return jsonify({'msg': str(e)}), 500
 
     @api.errorhandler(ObjectNotFound)
     def handle_object_not_found_error(e):
