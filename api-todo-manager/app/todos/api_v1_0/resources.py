@@ -45,6 +45,12 @@ class TodoResource(Resource):
         resp = todo_schema.dump(todo)
         return resp, 201
 
+    def put(self, todo_id):
+        todo = Todo.get_by_id(todo_id)
+        todo.ready = request.json.get("ready", None)
+        todo.title = request.json.get("title", None)
+        db.session.commit()
+
 api_todos.add_resource(TodoListResource, '/api/v1.0/todos', endpoint='todo_list_resource')
 api_todos.add_resource(TodoResource, '/api/v1.0/todo/<int:todo_id>', endpoint='todo_resource')
 

@@ -46,10 +46,35 @@ function useTodosData (props) {
       })
   }
 
+  function editData(id, title, ready){
+      if (ready){ready=false} else {ready=true}
+      axios({
+        method: "PUT",
+        url:"/api/v1.0/todo/" + id,
+        headers: {
+          Authorization: 'Bearer ' + token},
+        data: {
+          title: title,
+          ready: ready,
+        }
+      })
+      .then((response) => {
+        getData()
+      }).catch((error) => {
+        if (error.response) {
+          console.log(error.response)
+          console.log(error.response.status)
+          console.log(error.response.headers)
+        }
+      })
+  }
+
+
   return {
     todosData,
     getData,
-    deleteData
+    deleteData,
+    editData
   };
 }
 

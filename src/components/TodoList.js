@@ -16,9 +16,9 @@ function TodoList (props){
            <div id={todo.id}>
             <Form>
               <Row>
-                <Col md="auto"><Form.Check aria-label="option 1" defaultChecked={todo.ready} /></Col>
+                <Col md="auto"><Form.Check aria-label="option 1" defaultChecked={todo.ready} onChange={()=>props.editData(todo.id, todo.title, todo.ready)} /></Col>
                 <Col lg={true}><Form.Control type="text" value={todo.title} disabled/></Col>
-                <Col md="auto"><Button variant="primary" name="edit" type="submit">Edit</Button></Col>
+                <Col md="auto"><Button variant="primary" name="edit">Edit</Button></Col>
                 <Col md="auto"><Button onClick={()=>{props.deleteData(todo.id)}} variant="primary" name="delete">Delete</Button></Col>
               </Row>
             </Form>
