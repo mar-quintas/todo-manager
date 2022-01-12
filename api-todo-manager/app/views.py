@@ -43,7 +43,8 @@ def register():
         db.session.commit()
 
         access_token = create_access_token(identity=email)
-        response = {"access_token": access_token}
+        response = {"access_token": access_token
+        }
         return response
     else:
         return {"msg":"Password does not match"}, 401

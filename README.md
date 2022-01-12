@@ -5,9 +5,12 @@ A React-Flask App to create, edit, check and delete tasks.
 ## Usage
 
 *Requirements*
-  Python3
+
+  Python @3
 
   npm @6.14.8
+
+  node @14.15.1
 
   Download the repo and in `/todo-manager` run `./start-todo-manager.sh`
 
@@ -19,7 +22,7 @@ A React-Flask App to create, edit, check and delete tasks.
 
 ### About the app
 
-Register as a new user, on register you will be logged in and the Add tasks section will render.
+Register as a new user, login and the Add tasks section will render.
 
 There you can add new tasks, check or uncheck them, edit, save or cancel changes and delete tasks.
 
@@ -54,4 +57,4 @@ The database models can be found in ./api-todo-manager/app/models.py
 
 The login/register/logout are in ./api-todo-manager/app/views.py
 
-The db model includes todos, and users, that have "todos", and the login/register utilizes the user id to identify (and filter by) the tasks from the loged in user, so that the user can logout and at a later time, login and access all of its tasks that where saved in the db under its user id. 
+The db model includes todos, and users, that have "todos", and the login/register utilizes the user id to identify (and filter by) the tasks from the loged in user, so that the user can logout and at a later time, login and access all of its tasks that where saved in the db under its user id.

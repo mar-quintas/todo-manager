@@ -9,6 +9,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 
 
+
 api = Flask(__name__)
 api.config.from_object(Config)
 
