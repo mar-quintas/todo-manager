@@ -13,8 +13,6 @@ function TodoList (props){
 
   const [editMode, setEditMode] = useState(false)
 
-
-
   return (
     <>
       { props.todosData.map((todo) => (
@@ -32,7 +30,6 @@ function TodoList (props){
            :(
              <>
               <EditTitle setEditMode={setEditMode} editTitle={props.editTitle} id={todo.id} title={todo.title} ready={todo.ready}/>
-
              </>
            )
 

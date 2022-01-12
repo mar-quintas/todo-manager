@@ -38,7 +38,7 @@ function Register(props) {
         confirmation:""}))
 
       event.preventDefault()
-      navigate('/profile');
+      navigate('/');
     }
 
     function handleChange(event) {

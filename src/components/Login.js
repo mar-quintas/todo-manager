@@ -37,7 +37,7 @@ function Login(props) {
 
       event.preventDefault()
 
-      navigate('/profile');
+      navigate('/');
     }
 
     function handleChange(event) {

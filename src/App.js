@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes, useParams, UseNavigate } from 'react-router-dom'
 import Login from './components/Login'
-import Profile from './components/Profile'
 import Register from './components/Register'
 import useToken from './components/useToken'
 import './App.css'
@@ -29,8 +28,7 @@ function App() {
               </>
               :(<>
 
-                <Route path="/" element={<Profile token={token}/>}></Route>
-                <Route path="/profile" element={
+                <Route path="/" element={
                   <Container>
                     <ToAdd getData={getData} token={token}/>
                     <TodoList editTitle={editTitle} editData={editData} deleteData={deleteData} todosData={todosData} getData={getData} token={token}/>
