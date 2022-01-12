@@ -1,1 +1,2 @@
-web: gunicorn api-todo-manager/app:api
+
+web: gunicorn --pythonpath api-todo-manager/app __init__:api
