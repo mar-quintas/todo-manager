@@ -10,3 +10,4 @@ flask-wtf
 flask-login
 email-validator
 flask-jwt-extended
+gunicorn
