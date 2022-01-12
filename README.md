@@ -14,14 +14,14 @@ A React-Flask App to create, edit, check and delete tasks.
 
 
   Download the repo and in `/todo-manager` run `./start-todo-manager.sh`
-  
-  You can optionally pass a "fast" argument to avoid the instalation process and only starting the virtual environment and servers `./start-todo-manager.sh fast`
 
   This will install Reacts requirements from ./package.json and start the server on localhost:3000
 
   On parallel will create and start a virtual environment via python, install Flask requirements from ./api-todo-manager/requirements.py and start flask server on localhost:5000 - *this may take some minutes longer than react's load*
 
   The database is already initialized, migrated and updated, there is no action required. I used sqlite3, sqlAlchemy & marshmallow-sqlalchemy.
+  
+  You can optionally pass a "fast" argument to avoid the instalation process and only starting the virtual environment and servers `./start-todo-manager.sh fast`
 
 ### About the app
 
