@@ -56,14 +56,14 @@ function ToAdd (props) {
        <div>
         <Form className="addTask">
           <Row>
-            <Col lg={true}><Form.Control
+            <Col xs={true}><Form.Control
             onChange={handleChange}
             text={addTaskForm.title}
             name='title'
             type="text"
-            placeholder="Your task!"
+            placeholder="Add task!"
             value={addTaskForm.title}/></Col>
-            <Col md="auto"><Button onClick={AddTask} variant="primary" name="add" type="submit">Add</Button></Col>
+            <Col xs={"auto"}><Button onClick={AddTask} variant="success" name="add" type="submit">Add</Button></Col>
           </Row>
         </Form>
        </div>

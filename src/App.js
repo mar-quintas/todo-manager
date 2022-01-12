@@ -7,8 +7,10 @@ import NavBar from './components/Navbar'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TodoList from './components/TodoList'
 import ToAdd from './components/ToAdd'
+import Stack from 'react-bootstrap/Stack'
 import Container from 'react-bootstrap/Container'
 import useTodosData from './components/useTodosData'
+
 
 function App() {
   // NO los esta destructurando en el mismo orden que los exporto...
@@ -19,6 +21,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <NavBar token={token} removeToken={removeToken}/>
+          <Container>
             <Routes>
               {!token && token!=="" && token!== undefined?
               <>
@@ -30,13 +33,15 @@ function App() {
               :(<>
                 <Route path="*" element={<Navigate to="/"/>}></Route>
                 <Route path="/" element={
-                  <Container>
-                    <ToAdd getData={getData} token={token}/>
-                    <TodoList editTitle={editTitle} editData={editData} deleteData={deleteData} todosData={todosData} getData={getData} token={token}/>
-                  </Container>
+                    <Stack gap={4}>
+                      <h1>Add your tasks!</h1>
+                      <ToAdd getData={getData} token={token}/>
+                      <TodoList editTitle={editTitle} editData={editData} deleteData={deleteData} todosData={todosData} getData={getData} token={token}/>
+                    </Stack>
                 }></Route>
               </>)}
             </Routes>
+          </Container>
       </div>
     </BrowserRouter>
   );

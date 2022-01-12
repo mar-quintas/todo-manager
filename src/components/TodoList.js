@@ -5,18 +5,21 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { useState, useEffect } from 'react'
 import axios from "axios";
-import EditTitle from './EditTitle'
+import EditTodos from './EditTodos'
+import Stack from 'react-bootstrap/Stack'
 
 function TodoList (props){
 
   useEffect(() => { props.getData() },[])
 
   return (
+    <Stack gap={3}>
     <>
       { props.todosData.map((todo) => (
-          <EditTitle todo={todo} editData={props.editData} editTitle={props.editTitle}/>
+          <EditTodos key={todo.id} todo={todo} deleteData={props.deleteData} editData={props.editData} editTitle={props.editTitle}/>
       ))}
     </>
+    </Stack>
   );
 };
 

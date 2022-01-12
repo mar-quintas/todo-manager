@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import Stack from 'react-bootstrap/Stack'
+import Container from 'react-bootstrap/Container'
 
 function Login(props) {
 
@@ -22,7 +26,6 @@ function Login(props) {
       })
       .then((response) => {
         props.setToken(response.data.access_token)
-        console.log("you are logged in")
       }).catch((error) => {
         if (error.response) {
           console.log(error.response)
@@ -49,22 +52,25 @@ function Login(props) {
     return (
       <div>
         <h1>Login</h1>
-          <form className="login">
-            <input onChange={handleChange}
-                  type="email"
-                  text={loginForm.email}
-                  name="email"
-                  placeholder="Email"
-                  value={loginForm.email} />
-            <input onChange={handleChange}
-                  type="password"
-                  text={loginForm.password}
-                  name="password"
-                  placeholder="Password"
-                  value={loginForm.password} />
-
-          <button onClick={logMeIn}>Submit</button>
-        </form>
+        <Container >
+          <Form.Group className="login">
+            <Stack gap={2}>
+              <Form.Control onChange={handleChange}
+                    type="email"
+                    text={loginForm.email}
+                    name="email"
+                    placeholder="Email"
+                    value={loginForm.email} />
+              <Form.Control onChange={handleChange}
+                    type="password"
+                    text={loginForm.password}
+                    name="password"
+                    placeholder="Password"
+                    value={loginForm.password} />
+              <Button variant="success" onClick={logMeIn}>Submit</Button>
+            </Stack>
+          </Form.Group>
+        </Container>
       </div>
     );
 }

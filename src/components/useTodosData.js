@@ -17,7 +17,6 @@ function useTodosData (props) {
     })
     .then((response) => {
       const res = response.data
-      console.log(res)
       setTodosData(res)
     }).catch((error) => {
       if (error.response) {

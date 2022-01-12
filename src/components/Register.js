@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import Stack from 'react-bootstrap/Stack'
+import Container from 'react-bootstrap/Container'
 
 function Register(props) {
 
@@ -50,28 +54,31 @@ function Register(props) {
     return (
       <div>
         <h2>Register</h2>
-          <form className="register">
-            <input onChange={handleChange}
-                  type="email"
-                  text={registerForm.email}
-                  name="email"
-                  placeholder="Email"
-                  value={registerForm.email} />
-            <input onChange={handleChange}
-                  type="password"
-                  text={registerForm.password}
-                  name="password"
-                  placeholder="Password"
-                  value={registerForm.password} />
-            <input onChange={handleChange}
-                  type="password"
-                  text={registerForm.confirmation}
-                  name="confirmation"
-                  placeholder="Pass Confirmation"
-                  value={registerForm.confirmation} />
-
-          <button onClick={registerIn}>Submit</button>
-        </form>
+          <Container>
+            <Form.Group className="register">
+              <Stack gap={2}>
+                <Form.Control onChange={handleChange}
+                      type="email"
+                      text={registerForm.email}
+                      name="email"
+                      placeholder="Email"
+                      value={registerForm.email} />
+                <Form.Control onChange={handleChange}
+                      type="password"
+                      text={registerForm.password}
+                      name="password"
+                      placeholder="Password"
+                      value={registerForm.password} />
+                <Form.Control onChange={handleChange}
+                      type="password"
+                      text={registerForm.confirmation}
+                      name="confirmation"
+                      placeholder="Pass Confirmation"
+                      value={registerForm.confirmation} />
+                <Button variant="success" onClick={registerIn}>Submit</Button>
+            </Stack>
+          </Form.Group>
+        </Container>
       </div>
     );
 }
