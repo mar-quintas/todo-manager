@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+# To-do Manager
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-Flask App to create, edit, check and delete tasks.
 
-## Available Scripts
+## Usage
 
-In the project directory, you can run:
+*Requirements*
+  Python3
 
-### `npm start`
+  npm @6.14.8
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  Download the repo and in `/todo-manager` run `./start-todo-manager.sh`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  This will install Reacts requirements from ./package.json and start the server on localhost:3000
 
-### `npm test`
+  On parallel will create and start a virtual environment via python, install Flask requirements from ./api-todo-manager/requirements.py and start flask server on localhost:5000 - *this may take some minutes longer than react's load*
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  The database is already initialized, migrated and updated, there is no action required. I used sqlite3, sqlAlchemy & marshmallow-sqlalchemy.
 
-### `npm run build`
+### About the app
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Register as a new user, on register you will be logged in and the Add tasks section will render.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+There you can add new tasks, check or uncheck them, edit, save or cancel changes and delete tasks.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Finally you can also logout of the app.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Files
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Frontend
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The frontend was developed in React js, with Axios, React-Router-DOM and ReactBootstrap.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Building from the base `react-create-app`
 
-## Learn More
+#### todo-manager/src/app.js
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Its the app component that will render the rest of the components.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Imports libraries and components from ./src/components
 
-### Code Splitting
+Receives states from two helper files and passes them down as props to the rest of the components when required.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+For the render of the routes a ternary operator is used dividing the routes depending on the "token" (which is provided to the user on login/register and kept in localstorage), if no token is provided the user can only acces Login or Register routes, on the other hand if the token is provided, the user can access its tasks.
 
-### Analyzing the Bundle Size
+### Backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The backend was developed in Python3 - Flask with Flask-restful
 
-### Making a Progressive Web App
+The endpoints and methods used are in ./api-todo-manager/app/todos/api_v1_0/resources.py
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The database models can be found in ./api-todo-manager/app/models.py
 
-### Advanced Configuration
+The login/register/logout are in ./api-todo-manager/app/views.py
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The db model includes todos, and users, that have "todos", and the login/register utilizes the user id to identify (and filter by) the tasks from the loged in user, so that the user can logout and at a later time, login and access all of its tasks that where saved in the db under its user id. 
