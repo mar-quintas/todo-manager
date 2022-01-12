@@ -17,7 +17,7 @@ db.init_app(api)
 ma.init_app(api)
 migrate.init_app(api, db)
 login = LoginManager(api)
-login.login_view = 'app.login'
+login.login_view = 'login'
 
 # Captura todos los errores 404
 Api(api, catch_all_404s=True)

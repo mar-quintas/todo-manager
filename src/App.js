@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, useParams, UseNavigate } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useParams, UseNavigate, Navigate } from 'react-router-dom'
 import Login from './components/Login'
 import Register from './components/Register'
 import useToken from './components/useToken'
@@ -22,12 +22,13 @@ function App() {
             <Routes>
               {!token && token!=="" && token!== undefined?
               <>
+                <Route path="*" element={<Navigate to="/login"/>}></Route>
                 <Route exact path="/register" element={<Register setToken={setToken}/>}></Route>
                 <Route exact path="/login" element={<Login setToken={setToken}/>}>
                 </Route>
               </>
               :(<>
-
+                <Route path="*" element={<Navigate to="/"/>}></Route>
                 <Route path="/" element={
                   <Container>
                     <ToAdd getData={getData} token={token}/>

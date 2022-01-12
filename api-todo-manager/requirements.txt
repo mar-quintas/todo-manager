@@ -1,0 +1,12 @@
+flask
+python-dotenv
+flask_restful
+flask_sqlalchemy
+flask_migrate
+flask_marshmallow
+marshmallow-sqlalchemy
+python-dotenv
+flask-wtf
+flask-login
+email-validator
+flask-jwt-extended
