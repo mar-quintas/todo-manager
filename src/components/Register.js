@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Register(props) {
+
+    let navigate = useNavigate();
 
     const [registerForm, setregisterForm] = useState({
       email: "",
@@ -35,6 +38,7 @@ function Register(props) {
         confirmation:""}))
 
       event.preventDefault()
+      navigate('/profile');
     }
 
     function handleChange(event) {

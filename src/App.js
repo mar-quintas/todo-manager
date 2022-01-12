@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useParams, UseNavigate } from 'react-router-dom'
 import Login from './components/Login'
 import Profile from './components/Profile'
 import Register from './components/Register'
@@ -6,13 +6,15 @@ import useToken from './components/useToken'
 import './App.css'
 import NavBar from './components/Navbar'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ToDo from './components/ToDo'
+import TodoList from './components/TodoList'
 import ToAdd from './components/ToAdd'
 import Container from 'react-bootstrap/Container'
+import useTodosData from './components/useTodosData'
 
 function App() {
   // NO los esta destructurando en el mismo orden que los exporto...
   const { token, removeToken, setToken } = useToken();
+  const { todosData, getData, deleteData } = useTodosData();
 
   return (
     <BrowserRouter>
@@ -26,13 +28,16 @@ function App() {
                 </Route>
               </>
               :(<>
+
                 <Route path="/" element={<Profile token={token}/>}></Route>
+                <Route path="/profile" element={
+                  <Container>
+                    <ToAdd getData={getData} token={token}/>
+                    <TodoList deleteData={deleteData} todosData={todosData} getData={getData} token={token}/>
+                  </Container>
+                }></Route>
               </>)}
             </Routes>
-          <Container>
-            <ToAdd token={token}/>
-
-          </Container>
       </div>
     </BrowserRouter>
   );

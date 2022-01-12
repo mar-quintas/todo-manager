@@ -37,10 +37,16 @@ class TodoResource(Resource):
     def get(self, todo_id):
         todo = Todo.get_by_id(todo_id)
         resp = todo_schema.dump(todo)
-        return resp
+        return resp, 201
+
+    def delete(self, todo_id):
+        todo = Todo.get_by_id(todo_id)
+        todo.delete()
+        resp = todo_schema.dump(todo)
+        return resp, 201
 
 api_todos.add_resource(TodoListResource, '/api/v1.0/todos', endpoint='todo_list_resource')
-api_todos.add_resource(TodoResource, '/api/v1.0/todos/<int:todo_id>', endpoint='todo_resource')
+api_todos.add_resource(TodoResource, '/api/v1.0/todo/<int:todo_id>', endpoint='todo_resource')
 
 # folders
 folders_v1_0_bp = Blueprint('folders_v1_0_bp', __name__)

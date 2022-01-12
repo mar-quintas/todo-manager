@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login(props) {
+
+    let navigate = useNavigate();
 
     const [loginForm, setloginForm] = useState({
       email: "",
@@ -33,6 +36,8 @@ function Login(props) {
         password: ""}))
 
       event.preventDefault()
+
+      navigate('/profile');
     }
 
     function handleChange(event) {
