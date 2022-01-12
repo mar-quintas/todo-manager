@@ -12,7 +12,10 @@ A React-Flask App to create, edit, check and delete tasks.
 
   node @14.15.1
 
+
   Download the repo and in `/todo-manager` run `./start-todo-manager.sh`
+  
+  You can optionally pass a "fast" argument to avoid the instalation process and only starting the virtual environment and servers `./start-todo-manager.sh fast`
 
   This will install Reacts requirements from ./package.json and start the server on localhost:3000
 
