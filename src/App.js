@@ -14,7 +14,7 @@ import useTodosData from './components/useTodosData'
 function App() {
   // NO los esta destructurando en el mismo orden que los exporto...
   const { token, removeToken, setToken } = useToken();
-  const { todosData, getData, deleteData, editData } = useTodosData();
+  const { todosData, getData, deleteData, editData, editTitle } = useTodosData();
 
   return (
     <BrowserRouter>
@@ -33,7 +33,7 @@ function App() {
                 <Route path="/profile" element={
                   <Container>
                     <ToAdd getData={getData} token={token}/>
-                    <TodoList editData={editData} deleteData={deleteData} todosData={todosData} getData={getData} token={token}/>
+                    <TodoList editTitle={editTitle} editData={editData} deleteData={deleteData} todosData={todosData} getData={getData} token={token}/>
                   </Container>
                 }></Route>
               </>)}
